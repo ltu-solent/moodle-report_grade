@@ -189,13 +189,20 @@ class srsstatus extends table_sql {
             return 'Unmarked';
         }
         // Grades are saved as decimals.
-        $gradeint = (int)$row->solentgrade;
-        if ($gradeint == -1) {
-            return 'Unmarked';
+        $grade = $row->solentgrade;
+        if ($grade == -1) {
+            return get_string('unmarked', 'report_grade');
         }
-        if (isset($this->scale->items[$gradeint - 1])) {
-            return $this->scale->items[$gradeint - 1];
+        $gradetype = $this->gradeitem->gradetype;
+        if ($gradetype == GRADE_TYPE_SCALE) {
+            $gradeint = (int)$grade;
+            if (isset($this->scale->items[$gradeint - 1])) {
+                return $this->scale->items[$gradeint - 1];
+            }
+        } else if ($gradetype == GRADE_TYPE_VALUE) {
+            return $grade . ' / ' . (int)$this->gradeitem->grademax;
         }
+
         return get_string('scaleitemnotfound', 'report_grade');
     }
 

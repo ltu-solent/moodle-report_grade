@@ -32,91 +32,10 @@ require_once($CFG->dirroot . '/course/lib.php');
  *
  * @param int $scaleid
  * @param int $grade
- * @param int $cmid Course module id
  * @return string
  */
-function report_grade_convert_grade_report($scaleid, $grade, $cmid) {
-    $issitsassign = \local_solsits\helper::is_sits_assignment($cmid);
-    $grademarkscale = $issitsassign ?
-        get_config('local_solsits', 'grademarkscale') :
-        get_config('local_quercus_tasks', 'grademarkscale');
-    $grademarkexemptscale = $issitsassign ?
-        get_config('local_solsits', 'grademarkexemptscale') :
-        get_config('local_quercus_tasks', 'grademarkexemptscale');
-    if ($scaleid == $grademarkscale) { // Solent gradescale.
-        $converted = -1;
-        switch ($grade){
-            case 18:
-                $converted = 'A1';
-                break;
-            case 17:
-                $converted = 'A2';
-                break;
-            case 16:
-                $converted = 'A3';
-                break;
-            case 15:
-                $converted = 'A4';
-                break;
-            case 14:
-                $converted = 'B1';
-                break;
-            case 13:
-                $converted = 'B2';
-                break;
-            case 12:
-                $converted = 'B3';
-                break;
-            case 11:
-                $converted = 'C1';
-                break;
-            case 10:
-                $converted = 'C2';
-                break;
-            case 9:
-                $converted = 'C3';
-                break;
-            case 8:
-                $converted = 'D1';
-                break;
-            case 7:
-                $converted = 'D2';
-                break;
-            case 6:
-                $converted = 'D3';
-                break;
-            case 5:
-                $converted = 'F1';
-                break;
-            case 4:
-                $converted = 'F2';
-                break;
-            case 3:
-                $converted = 'F3';
-                break;
-            case 2:
-                $converted = 'S';
-                break;
-            case 1:
-                $converted = 'N';
-                break;
-            case null:
-                $converted = 'N';
-                break;
-            case -1:
-                $converted = '';
-                break;
-            case '-':
-                $converted = '';
-                break;
-        }
-    } else if ($scaleid == $grademarkexemptscale) {
-        if ($grade == null || $grade == -1) {
-            $converted = '';
-        } else {
-            $converted = (int)unformat_float($grade) - 1;
-        }
-    }
+function report_grade_convert_grade_report($scaleid, $grade) {
+    $converted = \local_solsits\helper::convert_grade($scaleid, $grade);
     return $converted;
 }
 
@@ -132,8 +51,9 @@ function report_grade_get_doublemarks($doublemarks, $iteminstance, $userid) {
     $return = [];
     foreach ($doublemarks as $doublemark) {
         if ($doublemark->userid == $userid && $iteminstance == $doublemark->assignment) {
+            $scale = $doublemark->scale < 0 ? ltrim($doublemark->scale, '-') : 0;
             $return = [
-                "scale" => ltrim($doublemark->scale, '-'),
+                "scale" => $scale,
                 "first" => $doublemark->first_grade,
                 "second" => $doublemark->second_grade,
             ];
@@ -155,7 +75,7 @@ function report_grade_get_sample($samples, $iteminstance, $userid) {
     foreach ($samples as $sample) {
         if ($sample->userid == $userid && $iteminstance == $sample->assignment) {
             if ($sample->sample == 1) {
-                $return = 'Yes';
+                $return = get_string('yes');
             }
         }
     }

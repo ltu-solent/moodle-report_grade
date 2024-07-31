@@ -79,3 +79,5 @@ $string['surname'] = 'Surname';
 
 $string['timeprocessed'] = 'Time processed';
 $string['timequeued'] = 'Time queued';
+
+$string['unmarked'] = 'Unmarked';
