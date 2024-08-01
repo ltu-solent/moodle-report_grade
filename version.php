@@ -32,5 +32,5 @@ $plugin->dependencies = [
     'theme_solent' => 2023021403,
     'local_solsits' => 2024073100,
     'local_quercus_tasks' => 2021020405,
-    'assignfeedback_doublemarks' => 2024073100,
+    'assignfeedback_doublemark' => 2024073100,
 ];
