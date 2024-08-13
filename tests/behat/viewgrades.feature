@@ -73,8 +73,8 @@ Feature: See grades for students
     And I log in as "teacher1"
     And I am on the "Course 1" "report_grade > Grade report" page
     Then the following should exist in the "gradetable" table:
-    | Firstname | Surname | Report 1 (50%) First mark | Report 1 (50%) Second mark | Report 1 (50%) Final grade | Report 1 (50%) Sample | Presentation 1 (50%) First mark | Presentation 1 (50%) Second mark | Presentation 1 (50%) Final grade |Presentation 1 (50%) Sample |
-    | Student   | 1       |                           |                            |                            |                       |                                 |                                  |                                  |                            |
-    | Student   | 2       |                           |                            |                            |                       |                                 |                                  |                                  |                            |
+    | First name | Surname | Report 1 (50%) First mark | Report 1 (50%) Second mark | Report 1 (50%) Final grade | Report 1 (50%) Sample | Presentation 1 (50%) First mark | Presentation 1 (50%) Second mark | Presentation 1 (50%) Final grade |Presentation 1 (50%) Sample |
+    | Student    | 1       |                           |                            |                            |                       |                                 |                                  |                                  |                            |
+    | Student    | 2       |                           |                            |                            |                       |                                 |                                  |                                  |                            |
     And the following should not exist in the "gradetable" table:
-    | Firstname | Surname | Not Quercus 1 (50%) First mark |
+    | First name | Surname | Not Quercus 1 (50%) First mark |

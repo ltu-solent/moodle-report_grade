@@ -504,30 +504,30 @@ Feature: See the status of grades uploaded to Student Records
     And I should see "Report 2 (25%)" in the ".marksupload-assignment-list" "css_element"
     And I should see "Marks upload status for assignment \"Report 1 (25%)\""
     And the following should exist in the "report_grade-srs_status" table:
-    | First name / Last name | Solent grade | Converted grade | Status | Error report |
-    | Student 1              | A1           | 100             |        |              |
-    | Student 2              | B2           | 65              |        |              |
-    | Student 3              | C3           | 52              |        |              |
-    | Student 4              | D1           | 48              |        |              |
-    | Student 5              | F2           | 20              |        |              |
-    | Student 6              | S            | 1               |        |              |
-    | Student 7              | N            | 0               |        |              |
-    | Student 8              | A2           | 92              |        |              |
-    | Student 9              | B3           | 62              |        |              |
-    | Student 0              | Unmarked     | 0               |        |              |
+    | First name | Solent grade | Converted grade | Status | Error report |
+    | Student 1  | A1           | 100             |        |              |
+    | Student 2  | B2           | 65              |        |              |
+    | Student 3  | C3           | 52              |        |              |
+    | Student 4  | D1           | 48              |        |              |
+    | Student 5  | F2           | 20              |        |              |
+    | Student 6  | S            | 1               |        |              |
+    | Student 7  | N            | 0               |        |              |
+    | Student 8  | A2           | 92              |        |              |
+    | Student 9  | B3           | 62              |        |              |
+    | Student 0  | Unmarked     | 0               |        |              |
     When I click on "Report 2 (25%)" "link" in the ".marksupload-assignment-list" "css_element"
     And the following should exist in the "report_grade-srs_status" table:
-    | First name / Last name | Solent grade    | Converted grade | Status | Error report |
-    | Student 1              | 100.00000 / 100 | 100             |        |              |
-    | Student 2              | 65.00000 / 100  | 65              |        |              |
-    | Student 3              | 48.90000 / 100  | 49              |        |              |
-    | Student 4              | 48.30000 / 100  | 48              |        |              |
-    | Student 5              | 48.50000 / 100  | 49              |        |              |
-    | Student 6              | 1.00000 / 100   | 1               |        |              |
-    | Student 7              | 0.00000 / 100   | 0               |        |              |
-    | Student 8              | 92.00000 / 100  | 92              |        |              |
-    | Student 9              | 62.00000 / 100  | 62              |        |              |
-    | Student 0              | Unmarked        | 0               |        |              |
+    | First name | Solent grade    | Converted grade | Status | Error report |
+    | Student 1  | 100.00000 / 100 | 100             |        |              |
+    | Student 2  | 65.00000 / 100  | 65              |        |              |
+    | Student 3  | 48.90000 / 100  | 49              |        |              |
+    | Student 4  | 48.30000 / 100  | 48              |        |              |
+    | Student 5  | 48.50000 / 100  | 49              |        |              |
+    | Student 6  | 1.00000 / 100   | 1               |        |              |
+    | Student 7  | 0.00000 / 100   | 0               |        |              |
+    | Student 8  | 92.00000 / 100  | 92              |        |              |
+    | Student 9  | 62.00000 / 100  | 62              |        |              |
+    | Student 0  | Unmarked        | 0               |        |              |
     And I should see "Marks upload status for assignment \"Report 2 (25%)\""
     # Use this in place of running the export grades task as there's no connection.
     And the following SITS grades are stored for "ABC101_A_SEM1_2023/24_ABC10101_001_0":
@@ -545,17 +545,17 @@ Feature: See the status of grades uploaded to Student Records
     And I am on the "ABC101_A_SEM1_2023/24" "report_grade > Grade report" page logged in as moduleleader1
     When I follow "Marks upload status"
     And the following should exist in the "report_grade-srs_status" table:
-    | First name / Last name | Solent grade | Converted grade | Status  | Error report |
-    | Student 1              | A1           | 100             | SUCCESS |              |
-    | Student 2              | B2           | 65              | SUCCESS |              |
-    | Student 3              | C3           | 52              | SUCCESS |              |
-    | Student 4              | D1           | 48              | SUCCESS |              |
-    | Student 5              | F2           | 20              | SUCCESS |              |
-    | Student 6              | S            | 1               | SUCCESS |              |
-    | Student 7              | N            | 0               | SUCCESS |              |
-    | Student 8              | A2           | 92              | SUCCESS |              |
-    | Student 9              | B3           | 62              | SUCCESS |              |
-    | Student 0              | Unmarked     | 0               | SUCCESS |              |
+    | First name | Solent grade | Converted grade | Status  | Error report |
+    | Student 1  | A1           | 100             | SUCCESS |              |
+    | Student 2  | B2           | 65              | SUCCESS |              |
+    | Student 3  | C3           | 52              | SUCCESS |              |
+    | Student 4  | D1           | 48              | SUCCESS |              |
+    | Student 5  | F2           | 20              | SUCCESS |              |
+    | Student 6  | S            | 1               | SUCCESS |              |
+    | Student 7  | N            | 0               | SUCCESS |              |
+    | Student 8  | A2           | 92              | SUCCESS |              |
+    | Student 9  | B3           | 62              | SUCCESS |              |
+    | Student 0  | Unmarked     | 0               | SUCCESS |              |
 
   Scenario: Quercus Assignments are listed in srs status page, but no grades have been released
     Given the following Quercus assignment exists:
@@ -858,17 +858,17 @@ Feature: See the status of grades uploaded to Student Records
     And I should see "Report 2 (25%)" in the ".marksupload-assignment-list" "css_element"
     And I should see "Marks upload status for assignment \"Report 1 (25%)\""
     And the following should exist in the "report_grade-srs_status" table:
-    | First name / Last name | Solent grade | Converted grade | Status | Error report |
-    | Student 1              | A1           | 100             |        |              |
-    | Student 2              | B2           | 65              |        |              |
-    | Student 3              | C3           | 52              |        |              |
-    | Student 4              | D1           | 48              |        |              |
-    | Student 5              | F2           | 20              |        |              |
-    | Student 6              | S            | 1               |        |              |
-    | Student 7              | N            | 0               |        |              |
-    | Student 8              | A2           | 92              |        |              |
-    | Student 9              | B3           | 62              |        |              |
-    | Student 0              | Unmarked     | 0               |        |              |
+    | First name | Solent grade | Converted grade | Status | Error report |
+    | Student 1  | A1           | 100             |        |              |
+    | Student 2  | B2           | 65              |        |              |
+    | Student 3  | C3           | 52              |        |              |
+    | Student 4  | D1           | 48              |        |              |
+    | Student 5  | F2           | 20              |        |              |
+    | Student 6  | S            | 1               |        |              |
+    | Student 7  | N            | 0               |        |              |
+    | Student 8  | A2           | 92              |        |              |
+    | Student 9  | B3           | 62              |        |              |
+    | Student 0  | Unmarked     | 0               |        |              |
     When I click on "Report 2 (25%)" "link" in the ".marksupload-assignment-list" "css_element"
     Then I should see "No released grades to display"
     And I should see "Marks upload status for assignment \"Report 2 (25%)\""
@@ -888,14 +888,14 @@ Feature: See the status of grades uploaded to Student Records
     And I am on the "ABC101_123456789" "report_grade > Grade report" page logged in as moduleleader1
     When I follow "Marks upload status"
     And the following should exist in the "report_grade-srs_status" table:
-    | First name / Last name | Solent grade | Converted grade | Status  | Error report |
-    | Student 1              | A1           | 100             | SUCCESS |              |
-    | Student 2              | B2           | 65              | SUCCESS |              |
-    | Student 3              | C3           | 52              | SUCCESS |              |
-    | Student 4              | D1           | 48              | SUCCESS |              |
-    | Student 5              | F2           | 20              | SUCCESS |              |
-    | Student 6              | S            | 1               | SUCCESS |              |
-    | Student 7              | N            | 0               | SUCCESS |              |
-    | Student 8              | A2           | 92              | SUCCESS |              |
-    | Student 9              | B3           | 62              | SUCCESS |              |
-    | Student 0              | Unmarked     | 0               | SUCCESS |              |
+    | First name | Solent grade | Converted grade | Status  | Error report |
+    | Student 1  | A1           | 100             | SUCCESS |              |
+    | Student 2  | B2           | 65              | SUCCESS |              |
+    | Student 3  | C3           | 52              | SUCCESS |              |
+    | Student 4  | D1           | 48              | SUCCESS |              |
+    | Student 5  | F2           | 20              | SUCCESS |              |
+    | Student 6  | S            | 1               | SUCCESS |              |
+    | Student 7  | N            | 0               | SUCCESS |              |
+    | Student 8  | A2           | 92              | SUCCESS |              |
+    | Student 9  | B3           | 62              | SUCCESS |              |
+    | Student 0  | Unmarked     | 0               | SUCCESS |              |
