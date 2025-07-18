@@ -25,8 +25,9 @@ Feature: See the status of grades uploaded to Student Records
     | shortname    | name          | archetype      |
     | moduleleader | Module leader | editingteacher |
     And I set the following system permissions of "Module leader" role:
-    | capability                  | permission |
-    | local/solsits:releasegrades | Allow      |
+    | capability                        | permission |
+    | local/solsits:releasegrades       | Allow      |
+    | local/quercus_tasks:releasegrades | Allow      |
     And the following "users" exist:
     | username      | firstname | lastname | email                     | idnumber |
     | student1      | Student   | 1        | student1@example.com      | 12345671 |
@@ -117,8 +118,7 @@ Feature: See the status of grades uploaded to Student Records
     | ABC101_A_SEM1_2023/24_ABC10101_002_0 | student9  | I'm the student 9 second submission |
     # Double mark the SITS assignments.
     And I am on the "ABC101_A_SEM1_2023/24_ABC10101_001_0" "assign activity" page logged in as teacher1
-    And I follow "View all submissions"
-    Then I click on "Grade" "link" in the "12345671" "table_row"
+    And I click on "Grade" "link" in the ".tertiary-navigation" "css_element"
     And I set the field "First grade" to "A1"
     And I set the field "Marking workflow state" to "In marking"
     And I set the field "Feedback comments" to "Great job no. 1!"
@@ -166,8 +166,7 @@ Feature: See the status of grades uploaded to Student Records
     And I press "Save changes"
     # Module leader now marks and agrees final grade.
     And I am on the "ABC101_A_SEM1_2023/24_ABC10101_001_0" "assign activity" page logged in as moduleleader1
-    And I follow "View all submissions"
-    Then I click on "Grade" "link" in the "12345671" "table_row"
+    And I click on "Grade" "link" in the ".tertiary-navigation" "css_element"
     And I set the field "Second grade" to "A1"
     And I set the field "Agreed grade" to "A1"
     And I set the field "Marking workflow state" to "Marking complete"
@@ -275,8 +274,7 @@ Feature: See the status of grades uploaded to Student Records
     | ABC101_A_SEM1_2023/24_ABC10101_002_0 | student9  | I'm the student 9 second submission |
     # Double mark the SITS Grademark assignment.
     And I am on the "ABC101_A_SEM1_2023/24_ABC10101_001_0" "assign activity" page logged in as teacher1
-    And I follow "View all submissions"
-    Then I click on "Grade" "link" in the "12345671" "table_row"
+    And I click on "Grade" "link" in the ".tertiary-navigation" "css_element"
     And I set the field "First grade" to "A1"
     And I set the field "Marking workflow state" to "In marking"
     And I set the field "Feedback comments" to "Great job no. 1!"
@@ -324,8 +322,7 @@ Feature: See the status of grades uploaded to Student Records
     And I press "Save changes"
     # Module leader now marks and agrees final grade.
     And I am on the "ABC101_A_SEM1_2023/24_ABC10101_001_0" "assign activity" page logged in as moduleleader1
-    And I follow "View all submissions"
-    Then I click on "Grade" "link" in the "12345671" "table_row"
+    And I click on "Grade" "link" in the ".tertiary-navigation" "css_element"
     And I set the field "Second grade" to "A1"
     And I set the field "Agreed grade" to "A1"
     And I set the field "Marking workflow state" to "Marking complete"
@@ -373,21 +370,23 @@ Feature: See the status of grades uploaded to Student Records
     And I press "Save changes"
     # Release the assignments.
     And I am on the "ABC101_A_SEM1_2023/24_ABC10101_001_0" "assign activity" page logged in as moduleleader1
-    And I follow "View all submissions"
+    And I navigate to "Submissions" in current page administration
+    And I change window size to "medium"
     # Reveal identities before releasing seems to work rather than the other way around.
-    And I select "Reveal student identities" from the "Grading action" singleselect
-    And I press "Continue"
+    # And I choose the "Reveal student identities" item in the "Actions" action menu
+    # And I press "Continue"
     And I set the field "selectall" to "1"
-    And I set the field "operation" to "Set marking workflow state"
-    And I click on "Go" "button" confirming the dialogue
+    # And I set the field "operation" to "Set marking workflow state"
+    # And I click on "Go" "button" confirming the dialogue
+    And I click on "Change marking state" "button" in the "sticky-footer" "region"
+    And I click on "Change marking state" "button" in the "Set marking workflow state" "dialogue"
     And I set the field "Marking workflow state" to "Released"
     And I set the field "Notify student" to "No"
     And I press "Save changes"
 
     # Double mark the Points assignment
     And I am on the "ABC101_A_SEM1_2023/24_ABC10101_002_0" "assign activity" page logged in as teacher1
-    And I follow "View all submissions"
-    Then I click on "Grade" "link" in the "12345671" "table_row"
+    And I click on "Grade" "link" in the ".tertiary-navigation" "css_element"
     And I set the field "First grade" to "100"
     And I set the field "Marking workflow state" to "In marking"
     And I set the field "Feedback comments" to "Great job no. 1!"
@@ -435,8 +434,7 @@ Feature: See the status of grades uploaded to Student Records
     And I press "Save changes"
     # Module leader now marks and agrees final grade.
     And I am on the "ABC101_A_SEM1_2023/24_ABC10101_002_0" "assign activity" page logged in as moduleleader1
-    And I follow "View all submissions"
-    Then I click on "Grade" "link" in the "12345671" "table_row"
+    And I click on "Grade" "link" in the ".tertiary-navigation" "css_element"
     And I set the field "Second grade" to "100"
     And I set the field "Agreed grade" to "100"
     And I set the field "Marking workflow state" to "Marking complete"
@@ -484,13 +482,13 @@ Feature: See the status of grades uploaded to Student Records
     And I press "Save changes"
     # Release the assignments.
     And I am on the "ABC101_A_SEM1_2023/24_ABC10101_002_0" "assign activity" page logged in as moduleleader1
-    And I follow "View all submissions"
+    And I navigate to "Submissions" in current page administration
     # Reveal identities before releasing seems to work rather than the other way around.
-    And I select "Reveal student identities" from the "Grading action" singleselect
+    And I choose the "Reveal student identities" item in the "Actions" action menu
     And I press "Continue"
     And I set the field "selectall" to "1"
-    And I set the field "operation" to "Set marking workflow state"
-    And I click on "Go" "button" confirming the dialogue
+    And I click on "Change marking state" "button" in the "sticky-footer" "region"
+    And I click on "Change marking state" "button" in the "Set marking workflow state" "dialogue"
     And I set the field "Marking workflow state" to "Released"
     And I set the field "Notify student" to "No"
     And I press "Save changes"
@@ -596,8 +594,7 @@ Feature: See the status of grades uploaded to Student Records
     | 2022_Report2                         | student9  | I'm the student 9 second submission |
     # Double mark the Quercus assignments.
     And I am on the "2022_Report1" "assign activity" page logged in as teacher1
-    And I follow "View all submissions"
-    Then I click on "Grade" "link" in the "12345671" "table_row"
+    And I click on "Grade" "link" in the ".tertiary-navigation" "css_element"
     And I set the field "First grade" to "A1"
     And I set the field "Marking workflow state" to "In marking"
     And I set the field "Feedback comments" to "Great job no. 1!"
@@ -645,8 +642,7 @@ Feature: See the status of grades uploaded to Student Records
     And I press "Save changes"
     # Module leader now marks and agrees final grade.
     And I am on the "2022_Report1" "assign activity" page logged in as moduleleader1
-    And I follow "View all submissions"
-    Then I click on "Grade" "link" in the "12345671" "table_row"
+    And I click on "Grade" "link" in the ".tertiary-navigation" "css_element"
     And I set the field "Second grade" to "A1"
     And I set the field "Agreed grade" to "A1"
     And I set the field "Marking workflow state" to "Marking complete"
@@ -741,8 +737,7 @@ Feature: See the status of grades uploaded to Student Records
     | 2022_Report2                         | student9  | I'm the student 9 second submission |
     # Double mark the Quercus assignments.
     And I am on the "2022_Report1" "assign activity" page logged in as teacher1
-    And I follow "View all submissions"
-    Then I click on "Grade" "link" in the "12345671" "table_row"
+    And I click on "Grade" "link" in the ".tertiary-navigation" "css_element"
     And I set the field "First grade" to "A1"
     And I set the field "Marking workflow state" to "In marking"
     And I set the field "Feedback comments" to "Great job no. 1!"
@@ -790,8 +785,7 @@ Feature: See the status of grades uploaded to Student Records
     And I press "Save changes"
     # Module leader now marks and agrees final grade.
     And I am on the "2022_Report1" "assign activity" page logged in as moduleleader1
-    And I follow "View all submissions"
-    Then I click on "Grade" "link" in the "12345671" "table_row"
+    And I click on "Grade" "link" in the ".tertiary-navigation" "css_element"
     And I set the field "Second grade" to "A1"
     And I set the field "Agreed grade" to "A1"
     And I set the field "Marking workflow state" to "Marking complete"
@@ -839,13 +833,13 @@ Feature: See the status of grades uploaded to Student Records
     And I press "Save changes"
     # Release the assignments.
     And I am on the "2022_Report1" "assign activity" page logged in as moduleleader1
-    And I follow "View all submissions"
+    And I navigate to "Submissions" in current page administration
     # Reveal identities before releasing seems to work rather than the other way around.
-    And I select "Reveal student identities" from the "Grading action" singleselect
+    And I choose the "Reveal student identities" item in the "Actions" action menu
     And I press "Continue"
     And I set the field "selectall" to "1"
-    And I set the field "operation" to "Set marking workflow state"
-    And I click on "Go" "button" confirming the dialogue
+    And I click on "Change marking state" "button" in the "sticky-footer" "region"
+    And I click on "Change marking state" "button" in the "Set marking workflow state" "dialogue"
     And I set the field "Marking workflow state" to "Released"
     And I set the field "Notify student" to "No"
     And I press "Save changes"
