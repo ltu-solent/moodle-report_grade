@@ -373,8 +373,8 @@ Feature: See the status of grades uploaded to Student Records
     And I navigate to "Submissions" in current page administration
     And I change window size to "medium"
     # Reveal identities before releasing seems to work rather than the other way around.
-    # And I choose the "Reveal student identities" item in the "Actions" action menu
-    # And I press "Continue"
+    And I choose the "Reveal student identities" item in the "Actions" action menu
+    And I press "Continue"
     And I set the field "selectall" to "1"
     # And I set the field "operation" to "Set marking workflow state"
     # And I click on "Go" "button" confirming the dialogue
