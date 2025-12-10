@@ -24,13 +24,13 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2024073100;
-$plugin->release = 'v4.1-r1';
-$plugin->requires  = 2020061500;
+$plugin->version   = 2025121000;
+$plugin->release = 'v4.5-r1';
+$plugin->requires  = 2024100700;
 $plugin->component = 'report_grade';
 $plugin->dependencies = [
-    'theme_solent' => 2023021403,
-    'local_solsits' => 2024073100,
-    'local_quercus_tasks' => 2021020405,
-    'assignfeedback_doublemark' => 2024073100,
+    'theme_solent' => 2024011600,
+    'local_solsits' => 2025032804,
+    'local_quercus_tasks' => 2021020406,
+    'assignfeedback_doublemark' => 2025052800,
 ];
