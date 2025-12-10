@@ -89,8 +89,8 @@ function report_grade_get_sample($samples, $iteminstance, $userid) {
  */
 function report_grade_get_external_examiner() {
     global $DB, $COURSE;
-    $externalexaminer = $DB->get_record_sql("
-        SELECT CONCAT(u.firstname, ' ', u.lastname) name
+    $externalexaminer = $DB->get_record_sql(
+        "SELECT CONCAT(u.firstname, ' ', u.lastname) name
             FROM {user} u
             INNER JOIN {role_assignments} ra ON ra.userid = u.id
             INNER JOIN {context} ct ON ct.id = ra.contextid
@@ -98,7 +98,11 @@ function report_grade_get_external_examiner() {
             INNER JOIN {role} r ON r.id = ra.roleid
             WHERE r.shortname = ?
             AND c.id = ?",
-            [get_config('report_grade', 'externalexaminershortname'), $COURSE->id]);
+        [
+            get_config('report_grade', 'externalexaminershortname'),
+            $COURSE->id,
+        ]
+    );
     return $externalexaminer;
 }
 
@@ -109,16 +113,17 @@ function report_grade_get_external_examiner() {
  */
 function report_grade_get_moderators() {
     global $DB, $COURSE;
-    $externalexaminer = $DB->get_records_sql("
-        SELECT CONCAT(u.firstname, ' ', u.lastname) name
-            FROM {user} u
-            INNER JOIN {role_assignments} ra ON ra.userid = u.id
-            INNER JOIN {context} ct ON ct.id = ra.contextid
-            INNER JOIN {course} c ON c.id = ct.instanceid
-            INNER JOIN {role} r ON r.id = ra.roleid
-            WHERE r.shortname = ?
-            AND c.id = ?",
-            [get_config('report_grade', 'moderatorshortname'), $COURSE->id]);
+    $externalexaminer = $DB->get_records_sql(
+        "SELECT CONCAT(u.firstname, ' ', u.lastname) name
+        FROM {user} u
+        INNER JOIN {role_assignments} ra ON ra.userid = u.id
+        INNER JOIN {context} ct ON ct.id = ra.contextid
+        INNER JOIN {course} c ON c.id = ct.instanceid
+        INNER JOIN {role} r ON r.id = ra.roleid
+        WHERE r.shortname = ?
+        AND c.id = ?",
+        [get_config('report_grade', 'moderatorshortname'), $COURSE->id]
+    );
     return $externalexaminer;
 }
 

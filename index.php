@@ -23,7 +23,7 @@
  */
 
 require('../../config.php');
-require_once($CFG->dirroot.'/report/grade/locallib.php');
+require_once($CFG->dirroot . '/report/grade/locallib.php');
 
 $id = optional_param('id', '', PARAM_INT);
 $courseid = optional_param('course', '', PARAM_INT);
@@ -37,8 +37,8 @@ require_login($course);
 $context = context_course::instance($course);
 $PAGE->set_context($context);
 require_capability('report/grade:view', $context);
-$PAGE->set_title($COURSE->shortname .': '. get_string('pluginname' , 'report_grade'));
-$PAGE->set_heading(get_string('pluginname' , 'report_grade'));
+$PAGE->set_title($COURSE->shortname . ': ' . get_string('pluginname', 'report_grade'));
+$PAGE->set_heading(get_string('pluginname', 'report_grade'));
 
 echo $OUTPUT->header();
 
@@ -72,9 +72,11 @@ if ($ee) {
 }
 
 $eeurl = report_grade_get_ee_form_url();
-$srsurl = html_writer::link(new moodle_url('/report/grade/srsstatus.php', ['cid' => $course]),
+$srsurl = html_writer::link(
+    new moodle_url('/report/grade/srsstatus.php', ['cid' => $course]),
     get_string('srsurl', 'report_grade'),
-    ['class' => 'btn btn-primary']);
+    ['class' => 'btn btn-primary']
+);
 echo html_writer::tag('p', $eeurl . ' ' . $srsurl);
 
 // Set up static column headers.
@@ -84,7 +86,7 @@ $table->cellpadding = 5;
 $table->id = 'gradetable';
 $table->head = [$strfirst, $strlast, $strid];
 
-require_once($CFG->dirroot.'/grade/export/lib.php');
+require_once($CFG->dirroot . '/grade/export/lib.php');
 global $DB;
 // Use the cm_idnumber rather than the gi_idnumber as the gi_idnumber seems to disappear sometimes.
 $sql = "SELECT gi.iteminstance, gi.itemname, cm.id cmid
@@ -95,7 +97,7 @@ $sql = "SELECT gi.iteminstance, gi.itemname, cm.id cmid
 $assigns = $DB->get_records_sql($sql, ['courseid' => $course]);
 if (count($assigns) == 0) {
     echo "<br>";
-    echo $OUTPUT->notification( get_string('noassignments', 'report_grade'), \core\output\notification::NOTIFY_INFO);
+    echo $OUTPUT->notification(get_string('noassignments', 'report_grade'), \core\output\notification::NOTIFY_INFO);
     echo $OUTPUT->footer();
     // End the output early.
     exit();

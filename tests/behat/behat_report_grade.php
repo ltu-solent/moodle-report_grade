@@ -33,7 +33,6 @@ require_once(__DIR__ . '/../../../../lib/behat/behat_base.php');
  * Behat Grade report steps
  */
 class behat_report_grade extends behat_base {
-
     /**
      * Convert page names to URLs for steps like 'When I am on the "[identifier]" "report_grade > [page type]" page'.
      *

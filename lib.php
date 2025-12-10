@@ -33,8 +33,14 @@
 function report_grade_extend_navigation_course($navigation, $course, $context) {
     if (has_capability('report/grade:view', $context)) {
         $url = new moodle_url('/report/grade/index.php', ['id' => $course->id]);
-        $navigation->add(get_string('pluginname', 'report_grade'),
-            $url, navigation_node::TYPE_SETTING, null, null, new pix_icon('i/report', ''));
+        $navigation->add(
+            get_string('pluginname', 'report_grade'),
+            $url,
+            navigation_node::TYPE_SETTING,
+            null,
+            null,
+            new pix_icon('i/report', '')
+        );
         $url = new moodle_url('/report/grade/srsstatus.php', ['cid' => $course->id]);
         $navigation->add(get_string('srsurl', 'report_grade'), $url, navigation_node::TYPE_SETTING);
     }
@@ -51,7 +57,7 @@ function report_grade_page_type_list($pagetype, $parentcontext, $currentcontext)
     $array = [
         '*' => get_string('page-x', 'pagetype'),
         'report-*' => get_string('page-report-x', 'pagetype'),
-        'report-grade-*' => get_string('page-report-grade-x',  'report_grade'),
+        'report-grade-*' => get_string('page-report-grade-x', 'report_grade'),
     ];
     return $array;
 }

@@ -25,20 +25,17 @@
 
 namespace report_grade\tables;
 
+use core_table\sql_table;
 use lang_string;
-use mod_assign_external;
 use moodle_url;
 use report_grade\helper;
-use table_sql;
 defined('MOODLE_INTERNAL') || die();
 
-require_once("$CFG->libdir/tablelib.php");
 require_once("$CFG->dirroot/mod/assign/externallib.php");
 /**
  * Outputs the Student records marks upload status for given assignment
  */
-class srsstatus extends table_sql {
-
+class srsstatus extends sql_table {
     /**
      * Data required for assembling the table
      *
@@ -124,8 +121,12 @@ class srsstatus extends table_sql {
                 JOIN {user} u ON u.id = g.student
                 LEFT JOIN {assign_grades} ag ON ag.assignment = g.assign AND ag.userid = g.student
             ";
-            $this->set_sql($select, $from, 'g.course = :courseid AND g.assign = :assignid',
-                ['courseid' => $courseid, 'assignid' => $assignid]);
+            $this->set_sql(
+                $select,
+                $from,
+                'g.course = :courseid AND g.assign = :assignid',
+                ['courseid' => $courseid, 'assignid' => $assignid]
+            );
         } else {
             // This is SITS.
             $select = "g.id, g.studentid, g.graderid,
@@ -139,8 +140,12 @@ class srsstatus extends table_sql {
                 JOIN {user} u ON u.id = g.studentid
                 LEFT JOIN {assign_grades} ag ON ag.assignment = cm.instance AND ag.userid = g.studentid
             ";
-            $this->set_sql($select, $from, 'a.cmid = :cmid',
-                ['cmid' => $cmid]);
+            $this->set_sql(
+                $select,
+                $from,
+                'a.cmid = :cmid',
+                ['cmid' => $cmid]
+            );
         }
     }
 

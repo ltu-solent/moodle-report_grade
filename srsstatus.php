@@ -107,8 +107,8 @@ $PAGE->set_context($coursecontext);
 $PAGE->set_title($title);
 $PAGE->set_heading($title);
 
-$PAGE->navbar->add(get_string('pluginname',  'report_grade'), new moodle_url('/report/grade/index.php', ['id' => $courseid]));
-$PAGE->navbar->add(get_string('srsstatus',  'report_grade'), new moodle_url('/report/grade/srsstatus.php', $pageparams));
+$PAGE->navbar->add(get_string('pluginname', 'report_grade'), new moodle_url('/report/grade/index.php', ['id' => $courseid]));
+$PAGE->navbar->add(get_string('srsstatus', 'report_grade'), new moodle_url('/report/grade/srsstatus.php', $pageparams));
 
 echo $OUTPUT->header();
 
@@ -126,14 +126,18 @@ if ($totalassignments > 1) {
             new moodle_url('/report/grade/srsstatus.php', [
                 'cid' => $data->courseid,
                 'qid' => $assign->id,
-            ]), $assign->name);
+            ]),
+            $assign->name
+        );
     }
     foreach ($sassignments as $assign) {
         $linklist[] = html_writer::link(
             new moodle_url('/report/grade/srsstatus.php', [
                 'cid' => $data->courseid,
                 'sid' => $assign->get('id'),
-            ]), $assign->get('title'));
+            ]),
+            $assign->get('title')
+        );
     }
     echo html_writer::alist($linklist, ['class' => 'marksupload-assignment-list']);
 }
