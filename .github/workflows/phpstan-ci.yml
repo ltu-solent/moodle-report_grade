@@ -1,0 +1,106 @@
+name: Moodle PHPStan CI
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - php: '8.3'
+            moodle-branch: 'SSU_405_STABLE'
+          - php: '8.2'
+            moodle-branch: 'SSU_405_STABLE'
+
+    steps:
+      - name: Setup moodle-branch
+        uses: actions/checkout@v4
+        with:
+          repository: 'ltu-solent/solent-moodle'
+          ref: ${{ matrix.moodle-branch }}
+          path: .
+
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          path: ./report/grade
+      # Need to checkout dependent plugins too.
+      - name: Checkout local_solsits plugin
+        uses: actions/checkout@v4
+        with:
+          repository: 'ltu-solent/moodle-local_solsits'
+          path: ./local/solsits
+          ref: 'main'
+
+      - name: Checkout local_solent plugin
+        uses: actions/checkout@v4
+        with:
+          repository: 'ltu-solent/moodle-local_solent'
+          path: ./local/solent
+          ref: 'main'
+
+      - name: Checkout local_quercus_tasks plugin
+        uses: actions/checkout@v4
+        with:
+          repository: 'ltu-solent/moodle-local_quercus_tasks'
+          path: ./local/quercus_tasks
+          ref: 'MOODLE_405_STABLE'
+
+      - name: Checkout assignfeedback_misconduct plugin
+        uses: actions/checkout@v4
+        with:
+          repository: 'ltu-solent/moodle-assign_feedback_misconduct'
+          path: ./mod/assign/feedback/misconduct
+          ref: 'MOODLE_405_STABLE'
+
+      - name: Checkout assignfeedback_doublemark plugin
+        uses: actions/checkout@v4
+        with:
+          repository: 'ltu-solent/moodle-assign_feedback_doublemark'
+          path: ./mod/assign/feedback/doublemark
+          ref: 'MOODLE_405_STABLE'
+
+      - name: Checkout assignfeedback_sample plugin
+        uses: actions/checkout@v4
+        with:
+          repository: 'ltu-solent/moodle-assign_feedback_sample'
+          path: ./mod/assign/feedback/sample
+          ref: 'MOODLE_405_STABLE'
+
+      - name: Checkout theme_solent plugin
+        uses: actions/checkout@v4
+        with:
+          repository: 'ltu-solent/moodle-theme_solent'
+          path: ./theme/solent
+          ref: 'MOODLE_405_STABLE'
+      
+      - name: Checkout format_onetopic plugin
+        uses: actions/checkout@v4
+        with:
+          repository: 'ltu-solent/moodle-format_onetopic'
+          path: ./course/format/onetopic
+          ref: 'SSU_main'
+
+      - name: Setup PHP ${{ matrix.php }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: ${{ matrix.extensions }}
+          ini-values: max_input_vars=5000
+          # If you are not using code coverage, keep "none". Otherwise, use "pcov" (Moodle 3.10 and up) or "xdebug".
+          # If you try to use code coverage with "none", it will fallback to phpdbg (which has known problems).
+          coverage: none
+
+      - name: Install PHPStan
+        run: |
+          composer require --dev micaherne/phpstan-moodle
+      - name: Copy config
+        run: |
+          cp config-dist.php config.php
+      - name: Run PHPStan on plugin
+        run: |
+          # Run PHPStan
+          vendor/bin/phpstan analyse report/grade -c report/grade/phpstan.neon
