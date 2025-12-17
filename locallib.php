@@ -32,7 +32,7 @@ require_once($CFG->dirroot . '/course/lib.php');
  *
  * @param int $scaleid
  * @param int $grade
- * @return string
+ * @return int
  */
 function report_grade_convert_grade_report($scaleid, $grade) {
     $converted = \local_solsits\helper::convert_grade($scaleid, $grade);
@@ -85,7 +85,7 @@ function report_grade_get_sample($samples, $iteminstance, $userid) {
 /**
  * Get external examiner name for currently loaded course
  *
- * @return stdClass
+ * @return stdClass|false
  */
 function report_grade_get_external_examiner() {
     global $DB, $COURSE;
@@ -130,7 +130,7 @@ function report_grade_get_moderators() {
 /**
  * Returns html link for the externalexaminer page for currently loaded course
  *
- * @return string
+ * @return string|null
  */
 function report_grade_get_ee_form_url() {
     global $DB, $COURSE;

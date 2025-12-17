@@ -167,10 +167,10 @@ foreach ($users as $ku => $vu) {
                     if ($confdouble[$k]->name == "enabled" && $confdouble[$k]->value == 1) {
                         if (!empty($userdoublemarks)) {
                             $row->cells[] = new html_table_cell(
-                                report_grade_convert_grade_report($userdoublemarks['scale'], $userdoublemarks['first'])
+                                (string)report_grade_convert_grade_report($userdoublemarks['scale'], $userdoublemarks['first'])
                             );
                             $row->cells[] = new html_table_cell(
-                                report_grade_convert_grade_report($userdoublemarks['scale'], $userdoublemarks['second'])
+                                (string)report_grade_convert_grade_report($userdoublemarks['scale'], $userdoublemarks['second'])
                             );
                         } else {
                             $row->cells[] = new html_table_cell();

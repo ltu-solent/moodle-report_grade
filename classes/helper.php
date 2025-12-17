@@ -41,6 +41,7 @@ class helper {
         $params = [
             'courseid' => $courseid,
         ];
+        $assignsql = '';
         if ($assignid > 0) {
             $assignsql = ' AND gi.iteminstance = :assignid ';
             $params['assignid'] = $assignid;
@@ -58,7 +59,7 @@ class helper {
      * Gets the scale record, and explodes the scale item for easier handling.
      *
      * @param int $scaleid
-     * @return stdClass|null
+     * @return \stdClass|null
      */
     public static function get_scale($scaleid) {
         global $DB;

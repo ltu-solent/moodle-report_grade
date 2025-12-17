@@ -29,6 +29,8 @@ use core_table\sql_table;
 use lang_string;
 use moodle_url;
 use report_grade\helper;
+use stdClass;
+
 defined('MOODLE_INTERNAL') || die();
 
 require_once("$CFG->dirroot/mod/assign/externallib.php");
@@ -36,12 +38,6 @@ require_once("$CFG->dirroot/mod/assign/externallib.php");
  * Outputs the Student records marks upload status for given assignment
  */
 class srsstatus extends sql_table {
-    /**
-     * Data required for assembling the table
-     *
-     * @var stdClass
-     */
-    private $data;
     /**
      * The grade item for this assignment
      *
@@ -63,7 +59,6 @@ class srsstatus extends sql_table {
      */
     public function __construct($data) {
         $this->useridfield = 'studentid';
-        $this->data = $data;
         $this->set_attribute('id', 'report_grade-srs_status');
         parent::__construct('report_grade-srs_status');
         $columns = [
@@ -144,7 +139,7 @@ class srsstatus extends sql_table {
                 $select,
                 $from,
                 'a.cmid = :cmid',
-                ['cmid' => $cmid]
+                ['cmid' => $data->assignment->get('cmid')]
             );
         }
     }

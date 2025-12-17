@@ -28,7 +28,7 @@
  *
  * @param navigation_node $navigation The navigation node to extend
  * @param stdClass $course The course to object for the report
- * @param stdClass $context The context of the course
+ * @param core\context $context The context of the course
  */
 function report_grade_extend_navigation_course($navigation, $course, $context) {
     if (has_capability('report/grade:view', $context)) {
