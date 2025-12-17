@@ -19,7 +19,7 @@ jobs:
       - name: Setup moodle-branch
         uses: actions/checkout@v4
         with:
-          repository: 'ltu-solent/solent-moodle'
+          repository: 'ltu-solent/moodle-solent'
           ref: ${{ matrix.moodle-branch }}
           path: .
 
