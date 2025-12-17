@@ -51,11 +51,11 @@ class behat_report_grade extends behat_base {
             case 'grade report':
                 $course = $this->get_course_id($identifier);
                 return new moodle_url('/report/grade/index.php', ['id' => $course]);
-                break;
             case "srs status":
                 $course = $this->get_course_id($identifier);
                 return new moodle_url('/report/grade/srsstatus.php', ['id' => $course]);
-                break;
+            default:
+                throw new Exception('Unrecognised grade page type "' . $type . '."');
         }
     }
 }
